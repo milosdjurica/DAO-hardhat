@@ -23,7 +23,7 @@ contract Box is Ownable {
 	// * Functions	  //
 	////////////////////
 
-	constructor() Ownable(msg.sender) {}
+	constructor() Ownable() {}
 
 	function store(uint _newValue) public onlyOwner {
 		value = _newValue;
