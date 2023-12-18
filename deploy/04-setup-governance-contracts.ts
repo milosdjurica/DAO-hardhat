@@ -10,7 +10,7 @@ import {
 import { ethers } from "hardhat";
 import { TimeLock } from "../typechain-types";
 
-const deployGovernorContract: DeployFunction = async function (
+const setupGovernanceContracts: DeployFunction = async function (
 	hre: HardhatRuntimeEnvironment,
 ) {
 	const { deployer } = await hre.getNamedAccounts();
@@ -43,6 +43,6 @@ const deployGovernorContract: DeployFunction = async function (
 	log("----------------------------------------------------");
 };
 
-export default deployGovernorContract;
-deployGovernorContract.id = "deployGovernorContract"; // id required to prevent re-execution
-deployGovernorContract.tags = ["GovernorContract", "all"];
+export default setupGovernanceContracts;
+setupGovernanceContracts.id = "setupGovernanceContracts"; // id required to prevent re-execution
+setupGovernanceContracts.tags = ["setupGovernanceContracts", "all"];
