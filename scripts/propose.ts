@@ -56,6 +56,6 @@ export async function propose(
 propose(FUNC_NAME, [NEW_STORE_VALUE], PROPOSAL_DESCRIPTION)
 	.then(() => process.exit(0))
 	.catch((e) => {
-		console.log(e);
+		console.error(e);
 		process.exit(1);
 	});

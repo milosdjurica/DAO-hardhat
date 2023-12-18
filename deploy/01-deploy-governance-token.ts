@@ -38,9 +38,10 @@ const delegate = async (
 	await tx.wait(1);
 
 	// TODO Should be 1 ?!?!?!
-	console.log(
-		`Checkpoints -> ${await governanceToken.numCheckpoints(delegatedAccount)}`,
-	);
+	const numOfCheckpoints =
+		await governanceToken.numCheckpoints(delegatedAccount);
+
+	console.log(`Checkpoints -> ${numOfCheckpoints}`);
 };
 
 export default deployGovernanceToken;
