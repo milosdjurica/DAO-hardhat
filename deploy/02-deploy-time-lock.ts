@@ -8,7 +8,6 @@ const deployTimeLock: DeployFunction = async function (
 ) {
 	const { deployer } = await hre.getNamedAccounts();
 	const { deploy, log } = hre.deployments;
-	const ethers = hre.ethers;
 
 	const timeLock = await deploy("TimeLock", {
 		from: deployer,

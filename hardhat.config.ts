@@ -16,11 +16,18 @@ const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "api-key";
 const config: HardhatUserConfig = {
 	solidity: {
 		compilers: [{ version: "0.8.20" }],
+		settings: {
+			optimizer: {
+				enabled: true,
+				runs: 200,
+			},
+		},
 	},
 	defaultNetwork: "hardhat",
 	networks: {
 		hardhat: {
 			chainId: 31337,
+			allowUnlimitedContractSize: true,
 			// forking: {
 			// 	url: MAINNET_RPC_URL,
 			// },
@@ -29,11 +36,13 @@ const config: HardhatUserConfig = {
 		// for working with yarn hardhat node !
 		localhost: {
 			chainId: 31337,
+			allowUnlimitedContractSize: true,
 			url: "http://127.0.0.1:8545",
 			// automatically gets 10 default accounts
 		},
 		ganache: {
 			chainId: 1337,
+			allowUnlimitedContractSize: true,
 			url: "http://127.0.0.1:8545",
 		},
 		sepolia: {
