@@ -37,6 +37,7 @@ const delegate = async (
 	const tx = await governanceToken.delegate(delegatedAccount);
 	await tx.wait(1);
 
+	// TODO Should be 1 ?!?!?!
 	console.log(
 		`Checkpoints -> ${await governanceToken.numCheckpoints(delegatedAccount)}`,
 	);

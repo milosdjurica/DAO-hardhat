@@ -2,7 +2,6 @@ import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
 import {
-	MIN_DELAY,
 	QUORUM_PERCENTAGE,
 	VOTING_DELAY,
 	VOTING_PERIOD,
