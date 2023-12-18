@@ -40,6 +40,18 @@ async function queAndExecute() {
 	}
 
 	console.log("Executing....");
+	const executeTx = await governor.execute(
+		[await box.getAddress()],
+		[0],
+		[encodedFunctionCall],
+		descriptionHash,
+	);
+
+	await executeTx.wait(1);
+
+	const boxNewValue = await box.retreive();
+
+	console.log("boxNewValue -> ", boxNewValue);
 }
 
 queAndExecute()
