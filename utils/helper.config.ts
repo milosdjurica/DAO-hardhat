@@ -14,3 +14,4 @@ export const ADDRESS_ZERO = ethers.ZeroAddress;
 export const NEW_STORE_VALUE = 1111;
 export const FUNC_NAME = "store";
 export const PROPOSAL_DESCRIPTION = "Proposal #1. Store 1111 in the box!";
+export const proposalsFilePath = "utils/proposals.json";

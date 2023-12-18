@@ -3,8 +3,14 @@ import {
 	FUNC_NAME,
 	NEW_STORE_VALUE,
 	PROPOSAL_DESCRIPTION,
+	VOTING_DELAY,
 	developmentChains,
+	proposalsFilePath,
 } from "../utils/helper.config";
+import { moveBlocks } from "../utils/move-blocks";
+import { GovernorContract } from "../typechain-types";
+import { EventLog } from "ethers";
+import * as fs from "fs";
 
 export async function propose(
 	functionToCall: string,
@@ -13,7 +19,8 @@ export async function propose(
 ) {
 	const isDevelopmentChain = developmentChains.includes(network.name);
 
-	const governor = await ethers.getContract("GovernorContract");
+	const governor: GovernorContract =
+		await ethers.getContract("GovernorContract");
 	const box = await ethers.getContract("Box");
 
 	const encodedFunctionCall = box.interface.encodeFunctionData(
@@ -32,10 +39,18 @@ export async function propose(
 		[encodedFunctionCall],
 		proposalDescription,
 	);
-	await proposeTx.wait(1);
+	const proposeReceipt = await proposeTx.wait(1);
 
 	if (isDevelopmentChain) {
+		await moveBlocks(VOTING_DELAY + 1);
 	}
+
+	const proposalId = await (proposeReceipt!.logs[0] as EventLog).args
+		.proposalId;
+
+	const proposals = JSON.parse(fs.readFileSync(proposalsFilePath, "utf8"));
+	proposals[network.config.chainId!.toString()].push(proposalId.toString());
+	fs.writeFileSync(proposalsFilePath, JSON.stringify(proposals));
 }
 
 propose(FUNC_NAME, [NEW_STORE_VALUE], PROPOSAL_DESCRIPTION)
