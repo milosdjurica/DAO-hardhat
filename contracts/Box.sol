@@ -1,36 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-////////////////////
-// * Imports 	  //
-////////////////////
-// Uncomment this line to use console.log
-// import "hardhat/console.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Box is Ownable {
-	////////////////////
-	// * Variables	  //
-	////////////////////
-	uint private value;
+    uint256 private s_number;
 
-	////////////////////
-	// * Events 	  //
-	////////////////////
-	event ValueChanged(uint newValue);
+    event NumberChanged(uint256 number);
 
-	////////////////////
-	// * Functions	  //
-	////////////////////
+    constructor() Ownable(msg.sender) {}
 
-	constructor() Ownable(msg.sender) {}
+    function store(uint256 _number) public onlyOwner {
+        s_number = _number;
+        emit NumberChanged(_number);
+    }
 
-	function store(uint _newValue) public onlyOwner {
-		value = _newValue;
-		emit ValueChanged(_newValue);
-	}
-
-	function retreive() public view returns (uint) {
-		return value;
-	}
+    function getNumber() external view returns (uint256) {
+        return s_number;
+    }
 }
