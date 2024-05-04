@@ -20,4 +20,4 @@ const deployVotingToken: DeployFunction = async function (
 
 export default deployVotingToken;
 deployVotingToken.id = "deployVotingToken"; // id required to prevent re-execution
-deployVotingToken.tags = ["votingToken", "all"];
+deployVotingToken.tags = ["VotingToken", "all"];
