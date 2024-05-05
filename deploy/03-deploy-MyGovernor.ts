@@ -1,7 +1,7 @@
 import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { TimeLock } from "../typechain-types";
-import { ZERO_ADDRESS } from "../utils/helper.config";
+
 const deployMyGovernor: DeployFunction = async function (
 	hre: HardhatRuntimeEnvironment,
 ) {
