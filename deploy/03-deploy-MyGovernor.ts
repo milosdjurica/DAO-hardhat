@@ -1,6 +1,13 @@
 import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { TimeLock } from "../typechain-types";
+import {
+	GOVERNOR_NAME,
+	PROPOSAL_THRESHOLD,
+	QUORUM_PERCENTAGE,
+	VOTING_DELAY,
+	VOTING_PERIOD,
+} from "../utils/helper.config";
 
 const deployMyGovernor: DeployFunction = async function (
 	hre: HardhatRuntimeEnvironment,
@@ -19,7 +26,15 @@ const deployMyGovernor: DeployFunction = async function (
 
 	const myGovernor = await deploy("MyGovernor", {
 		from: deployer,
-		args: [votingToken.address, timeLock.address], // ! constructor args
+		args: [
+			GOVERNOR_NAME,
+			VOTING_DELAY,
+			VOTING_PERIOD,
+			PROPOSAL_THRESHOLD,
+			votingToken.address,
+			QUORUM_PERCENTAGE,
+			timeLock.address,
+		], // ! constructor args
 		log: true,
 		// waitConfirmations: 1,
 	});
