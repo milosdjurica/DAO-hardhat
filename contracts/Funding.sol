@@ -13,25 +13,21 @@ contract Funding is Ownable {
     ////////////////////
     // * Errors 	  //
     ////////////////////
+    error Funding__ZeroAddress();
+    error Funding__AmountIsZero();
+    error Funding__NotEnoughBalance();
 
     ////////////////////
     // * Types 		  //
     ////////////////////
-    struct User {
-        address userAddress;
-        uint256 moneyNeeded;
-        uint256 moneyFunded;
-    }
 
     ////////////////////
     // * Variables	  //
     ////////////////////
-    User[] public s_users;
 
     ////////////////////
     // * Events 	  //
     ////////////////////
-    event UserAdded(User addedUser);
 
     ////////////////////
     // * Modifiers 	  //
@@ -57,10 +53,13 @@ contract Funding is Ownable {
     ////////////////////
     // * Public 	  //
     ////////////////////
-    function addNewUser(address _userAddress, uint256 _moneyNeeded) public onlyOwner {
-        User memory newUser = User(_userAddress, _moneyNeeded, 0);
-        s_users.push(newUser);
-        emit UserAdded(newUser);
+    function fund(address _userToFund, uint256 _amount) public onlyOwner {
+        if (_userToFund == address(0)) revert Funding__ZeroAddress();
+        if (_amount <= 0) revert Funding__AmountIsZero();
+        if (address(this).balance <= _amount) revert Funding__NotEnoughBalance();
+
+        (bool success,) = _userToFund.call{value: address(this).balance}("");
+        require(success);
     }
 
     ////////////////////
