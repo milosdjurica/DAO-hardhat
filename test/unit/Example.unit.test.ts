@@ -49,7 +49,14 @@ const isDevelopmentChain = developmentChains.includes(network.name);
 			// describe("MyGovernor tests", () => {
 			// 	it("Example test", async () => {});
 			// });
-			// describe("Funding tests", () => {
-			// 	it("Example test", async () => {});
-			// });
+			describe("Funding tests", () => {
+				it("Reverts if not owner", async () => {
+					await expect(funding.fund(deployer.address, 1))
+						.to.be.revertedWithCustomError(
+							funding,
+							"OwnableUnauthorizedAccount",
+						)
+						.withArgs(deployer.address);
+				});
+			});
 		});
