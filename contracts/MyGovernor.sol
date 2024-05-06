@@ -31,7 +31,7 @@ contract MyGovernor is
         TimelockController _timelock
     )
         Governor(_governorName)
-        GovernorSettings(_votingDelay, /* 1 day */ _votingPeriod, /* 1 week */ _proposalThreshold)
+        GovernorSettings(_votingDelay, _votingPeriod, _proposalThreshold)
         GovernorVotes(_token)
         GovernorVotesQuorumFraction(_quorumPercentage)
         GovernorTimelockControl(_timelock)
