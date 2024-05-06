@@ -16,6 +16,7 @@ contract Funding is Ownable {
     error Funding__ZeroAddress();
     error Funding__AmountIsZero();
     error Funding__NotEnoughBalance();
+    error Funding__TransferFailed();
 
     ////////////////////
     // * Types 		  //
@@ -58,8 +59,8 @@ contract Funding is Ownable {
         if (_amount <= 0) revert Funding__AmountIsZero();
         if (address(this).balance <= _amount) revert Funding__NotEnoughBalance();
 
-        (bool success,) = _userToFund.call{value: address(this).balance}("");
-        require(success);
+        (bool success,) = _userToFund.call{value: _amount}("");
+        if (!success) revert Funding__TransferFailed();
     }
 
     ////////////////////
