@@ -126,13 +126,13 @@ const isDevelopmentChain = developmentChains.includes(network.name);
 
 					console.log("Queueing....");
 					const queueTx = await myGovernor.queue(
-						// TODO maybe should be -> await funding.getAddress()
 						[await funding.getAddress()],
 						[0],
 						[encodedFunctionCall],
 						descriptionHash,
 					);
 					await queueTx.wait(1);
+
 					console.log("Move blocks waiting vote to pass...");
 					for (let i = 0; i < VOTING_PERIOD + 1; i++) {
 						await network.provider.send("evm_increaseTime", [MIN_DELAY + 1]);
@@ -153,7 +153,6 @@ const isDevelopmentChain = developmentChains.includes(network.name);
 
 					await executeTx.wait(1);
 
-					// TODO add method
 					const lastWinner = await funding.s_winner();
 					console.log("lastWinner", lastWinner);
 				});
