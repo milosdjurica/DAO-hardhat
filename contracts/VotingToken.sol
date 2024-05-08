@@ -7,7 +7,9 @@ import {ERC20Votes} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Vo
 import {Nonces} from "@openzeppelin/contracts/utils/Nonces.sol";
 
 contract VotingToken is ERC20, ERC20Permit, ERC20Votes {
-    constructor() ERC20("VotingToken", "VTK") ERC20Permit("VotingToken") {}
+    constructor() ERC20("VotingToken", "VTK") ERC20Permit("VotingToken") {
+        _mint(msg.sender, 10000);
+    }
 
     // The functions below are overrides required by Solidity.
 

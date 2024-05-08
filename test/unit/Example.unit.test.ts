@@ -66,6 +66,9 @@ const isDevelopmentChain = developmentChains.includes(network.name);
 				});
 
 				it("Funds", async () => {
+					// ! Giving power to deployer to vote !!!
+					votingToken.delegate(deployer);
+
 					const DESCRIPTION = `Fund user ${deployer.address} with ${1}`;
 					const encodedFunctionCall = funding.interface.encodeFunctionData(
 						"fund",

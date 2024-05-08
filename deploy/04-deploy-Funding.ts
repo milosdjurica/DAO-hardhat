@@ -22,7 +22,7 @@ const deployFunding: DeployFunction = async function (
 		funding.address,
 	)) as unknown as Funding;
 
-	fundingContract.transferOwnership(timeLock.address);
+	await fundingContract.transferOwnership(timeLock.address);
 
 	log(`Funding contract: `, funding.address);
 	log("----------------------------------------------------");
