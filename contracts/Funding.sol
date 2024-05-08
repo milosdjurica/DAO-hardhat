@@ -25,6 +25,7 @@ contract Funding is Ownable {
     ////////////////////
     // * Variables	  //
     ////////////////////
+    address public s_winner;
 
     ////////////////////
     // * Events 	  //
@@ -59,6 +60,7 @@ contract Funding is Ownable {
         if (_amount <= 0) revert Funding__AmountIsZero();
         if (address(this).balance <= _amount) revert Funding__NotEnoughBalance();
 
+        s_winner = _userToFund;
         (bool success,) = _userToFund.call{value: _amount}("");
         if (!success) revert Funding__TransferFailed();
     }
