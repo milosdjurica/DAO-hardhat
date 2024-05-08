@@ -30,6 +30,7 @@ contract Funding is Ownable {
     ////////////////////
     // * Events 	  //
     ////////////////////
+    event Deposit(address indexed sender, uint256 amount);
 
     ////////////////////
     // * Modifiers 	  //
@@ -48,6 +49,13 @@ contract Funding is Ownable {
     // * Receive & Fallback   //
     ////////////////////////////
 
+    fallback() external payable {
+        emit Deposit(msg.sender, msg.value);
+    }
+
+    receive() external payable {
+        emit Deposit(msg.sender, msg.value);
+    }
     ////////////////////
     // * External 	  //
     ////////////////////

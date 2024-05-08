@@ -69,6 +69,12 @@ const isDevelopmentChain = developmentChains.includes(network.name);
 					// ! Giving power to deployer to vote !!!
 					votingToken.delegate(deployer);
 
+					// ! Giving money to the funding contract
+					await deployer.sendTransaction({
+						to: await funding.getAddress(),
+						value: ethers.parseEther("1"),
+					});
+
 					const DESCRIPTION = `Fund user ${deployer.address} with ${1}`;
 					const encodedFunctionCall = funding.interface.encodeFunctionData(
 						"fund",
