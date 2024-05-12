@@ -1,7 +1,6 @@
 import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
-
-import { MIN_DELAY } from "../utils/helper.config";
+import { EXECUTORS, MIN_DELAY, PROPOSERS } from "../utils/helper.config";
 
 const deployTimeLock: DeployFunction = async function (
 	hre: HardhatRuntimeEnvironment,
@@ -11,8 +10,9 @@ const deployTimeLock: DeployFunction = async function (
 
 	const timeLock = await deploy("TimeLock", {
 		from: deployer,
-		args: [MIN_DELAY, [], []],
+		args: [MIN_DELAY, PROPOSERS, EXECUTORS], // ! constructor args
 		log: true,
+		// waitConfirmations: 1,
 	});
 
 	log(`TimeLock contract: `, timeLock.address);
@@ -21,4 +21,4 @@ const deployTimeLock: DeployFunction = async function (
 
 export default deployTimeLock;
 deployTimeLock.id = "deployTimeLock"; // id required to prevent re-execution
-deployTimeLock.tags = ["timeLock", "all"];
+deployTimeLock.tags = ["TimeLock", "all"];

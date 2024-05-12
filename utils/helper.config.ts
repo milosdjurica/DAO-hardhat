@@ -1,17 +1,14 @@
 import { ethers } from "hardhat";
 
 export const developmentChains = ["hardhat", "localhost", "ganache"];
+export const ZERO_ADDRESS = ethers.ZeroAddress;
 
-// 1 hour
-export const MIN_DELAY = 3600;
+export const MIN_DELAY = 3600; // ! 1 hour - after a vote passes
+export const PROPOSERS = []; // ! anyone can propose
+export const EXECUTORS = []; // ! anyone can execute
 
-export const VOTING_DELAY = 1;
-export const VOTING_PERIOD = 5;
-export const QUORUM_PERCENTAGE = 4;
-
-export const ADDRESS_ZERO = ethers.ZeroAddress;
-
-export const NEW_STORE_VALUE = 1111;
-export const FUNC_NAME = "store";
-export const PROPOSAL_DESCRIPTION = "Proposal #1. Store 1111 in the box!";
-export const proposalsFilePath = "utils/proposals.json";
+export const GOVERNOR_NAME = "MyGovernor";
+export const VOTING_DELAY = 7200; // ! Delay since proposal is created until voting starts.
+export const VOTING_PERIOD = 50400; // ! Length of period during which people can cast their vote.
+export const PROPOSAL_THRESHOLD = 0; // ! Minimum number of votes an account must have to create a proposal.
+export const QUORUM_PERCENTAGE = 4; // ! Quorum required for a proposal to pass.
